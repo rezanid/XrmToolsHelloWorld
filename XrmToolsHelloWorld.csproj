@@ -98,7 +98,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountGreetingPlugin.cs" />
+    <Compile Include="AccountGreetingPlugin.cs">
+      <Generator>Xrm Tools Plugin Code Generator</Generator>
+      <LastGenOutput>AccountGreetingPlugin.g.cs</LastGenOutput>
+      <IsXrmPlugin>True</IsXrmPlugin>
+    </Compile>
+    <Compile Include="AccountGreetingPlugin.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountGreetingPlugin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

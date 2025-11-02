@@ -5,14 +5,19 @@ using XrmTools.Meta.Attributes;
 namespace XrmToolsHelloWorld
 {
     [Plugin]
-    [Step("Create", "account", Stages.PreOperation, ExecutionMode.Synchronous)]
+    [Step("Create", "account", "name, description", Stages.PreOperation, ExecutionMode.Synchronous)]
     public partial class AccountGreetingPlugin : IPlugin
     {
+        [Dependency]
+        ITracingService Tracing { get => Require<ITracingService>(); }
+
         public void Execute(IServiceProvider serviceProvider)
         {
-            var context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
-            var target = (Entity)context.InputParameters["Target"];
-            target["description"] = "Hello from XrmToolsHelloWorld Plugin!"];
+            using (var scope = CreateScope(serviceProvider))
+            {
+                Tracing.Trace("AccountGreetingPlugin: Execute started.");
+                Target.Description = $"Welcome {Target.Name}";
+            }
         }
     }
 }
