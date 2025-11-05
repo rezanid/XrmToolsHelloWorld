@@ -25,7 +25,11 @@ namespace XrmToolsHelloWorld
             scope.Set<IServiceProvider>(serviceProvider);
         
             scope.Set<IPluginExecutionContext>((IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext)));
+            scope.Set<IOrganizationServiceFactory>((IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory)));
             scope.Set<ITracingService>((ITracingService)serviceProvider.GetService(typeof(ITracingService)));
+            scope.Set<XrmToolsHelloWorld.IGreetingService>(scope.Set(new XrmToolsHelloWorld.GreetingService(
+                scope.Set(new XrmToolsHelloWorld.OrdinalFormatterService()), 
+                scope.Set(new XrmToolsHelloWorld.AccountStatisticsService(this.Config, this.SecureConfig, this.OrganizationService)))));
             return scope;
         }
 	    [EntityLogicalName("account")]
