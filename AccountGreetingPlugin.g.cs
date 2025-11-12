@@ -24,12 +24,12 @@ namespace XrmToolsHelloWorld
             var scope = new DependencyScope<AccountGreetingPlugin>();
             scope.Set<IServiceProvider>(serviceProvider);
         
+            var iTracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
+        
             scope.Set<IPluginExecutionContext>((IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext)));
             scope.Set<IOrganizationServiceFactory>((IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory)));
             scope.Set<ITracingService>((ITracingService)serviceProvider.GetService(typeof(ITracingService)));
-            scope.Set<XrmToolsHelloWorld.IGreetingService>(scope.Set(new XrmToolsHelloWorld.GreetingService(
-                scope.Set(new XrmToolsHelloWorld.OrdinalFormatterService()), 
-                scope.Set(new XrmToolsHelloWorld.AccountStatisticsService(this.Config, this.SecureConfig, this.OrganizationService)))));
+            scope.Set<XrmToolsHelloWorld.IGreetingService>(scope.Set(new XrmToolsHelloWorld.GreetingService((ITracingService)serviceProvider.GetService(typeof(ITracingService)), scope.Set(new XrmToolsHelloWorld.OrdinalFormatterService()), scope.Set(new XrmToolsHelloWorld.AccountStatisticsService(this.Config, this.SecureConfig, this.OrganizationService)), scope.Set(new XrmToolsHelloWorld.AccountQueryService(this.OrganizationService)))));
             return scope;
         }
 	    [EntityLogicalName("account")]
@@ -46,6 +46,7 @@ namespace XrmToolsHelloWorld
 	    		public partial class Fields
 	    		{
 	    			public const string Description = "description";
+	    			public const string IndustryCode = "industrycode";
 	    			public const string Name = "name";
 	    		
 	    			public static bool TryGet(string logicalName, out string attribute)
@@ -53,6 +54,7 @@ namespace XrmToolsHelloWorld
 	    				switch (logicalName)
 	    				{
 	    					case nameof(Description): attribute = Description; return true;
+	    					case nameof(IndustryCode): attribute = IndustryCode; return true;
 	    					case nameof(Name): attribute = Name; return true;
 	    					default: attribute = null; return false;
 	    				}
@@ -68,6 +70,79 @@ namespace XrmToolsHelloWorld
 	    
 	    		public partial class OptionSets
 	    		{
+	    			/// <summary>
+	    			/// Type of industry with which the account is associated.
+	    			/// </summary>
+	    			[DataContract]
+	    			public enum Industry
+	    			{
+	    				[EnumMember]
+	    				Accounting = 1,
+	    				[EnumMember]
+	    				AgricultureAndNonPetrolNaturalResourceExtraction = 2,
+	    				[EnumMember]
+	    				BroadcastingPrintingAndPublishing = 3,
+	    				[EnumMember]
+	    				Brokers = 4,
+	    				[EnumMember]
+	    				BuildingSupplyRetail = 5,
+	    				[EnumMember]
+	    				BusinessServices = 6,
+	    				[EnumMember]
+	    				Consulting = 7,
+	    				[EnumMember]
+	    				ConsumerServices = 8,
+	    				[EnumMember]
+	    				DesignDirectionAndCreativeManagement = 9,
+	    				[EnumMember]
+	    				DistributorsDispatchersAndProcessors = 10,
+	    				[EnumMember]
+	    				DoctorSOfficesAndClinics = 11,
+	    				[EnumMember]
+	    				DurableManufacturing = 12,
+	    				[EnumMember]
+	    				EatingAndDrinkingPlaces = 13,
+	    				[EnumMember]
+	    				EntertainmentRetail = 14,
+	    				[EnumMember]
+	    				EquipmentRentalAndLeasing = 15,
+	    				[EnumMember]
+	    				Financial = 16,
+	    				[EnumMember]
+	    				FoodAndTobaccoProcessing = 17,
+	    				[EnumMember]
+	    				InboundCapitalIntensiveProcessing = 18,
+	    				[EnumMember]
+	    				InboundRepairAndServices = 19,
+	    				[EnumMember]
+	    				Insurance = 20,
+	    				[EnumMember]
+	    				LegalServices = 21,
+	    				[EnumMember]
+	    				NonDurableMerchandiseRetail = 22,
+	    				[EnumMember]
+	    				OutboundConsumerService = 23,
+	    				[EnumMember]
+	    				PetrochemicalExtractionAndDistribution = 24,
+	    				[EnumMember]
+	    				ServiceRetail = 25,
+	    				[EnumMember]
+	    				SigAffiliations = 26,
+	    				[EnumMember]
+	    				SocialServices = 27,
+	    				[EnumMember]
+	    				SpecialOutboundTradeContractors = 28,
+	    				[EnumMember]
+	    				SpecialtyRealty = 29,
+	    				[EnumMember]
+	    				Transportation = 30,
+	    				[EnumMember]
+	    				UtilityCreationAndDistribution = 31,
+	    				[EnumMember]
+	    				VehicleRetail = 32,
+	    				[EnumMember]
+	    				Wholesale = 33,
+	    			}
 	    		}
 	    	}
 	    
@@ -81,6 +156,16 @@ namespace XrmToolsHelloWorld
 	    	{
 	    		get => TryGetAttributeValue("description", out string value) ? value : null;
 	    		set => this["description"] = value;
+	    	}
+	    	/// <summary>
+	    	/// Required Level: None</br>
+	    	/// Valid for: Create Update Read</br>
+	    	/// </summary>
+	    	[AttributeLogicalName("industrycode")]
+	    	public TargetAccount.Meta.OptionSets.Industry? IndustryCode
+	    	{
+	    		get => TryGetAttributeValue("industrycode", out OptionSetValue opt) && opt != null ? (TargetAccount.Meta.OptionSets.Industry?)opt.Value : null;
+	    		set => this["industrycode"] = value == null ? null : new OptionSetValue((int)value);
 	    	}
 	    	/// <summary>
 	    	/// Max Length: 160</br>

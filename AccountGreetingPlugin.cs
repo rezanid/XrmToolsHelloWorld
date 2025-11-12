@@ -5,7 +5,7 @@ using XrmTools.Meta.Attributes;
 namespace XrmToolsHelloWorld
 {
     [Plugin]
-    [Step("Create", "account", "name, description", Stages.PreOperation, ExecutionMode.Synchronous)]
+    [Step("Create", "account", "name, description, industrycode", Stages.PreOperation, ExecutionMode.Synchronous)]
     public partial class AccountGreetingPlugin : IPlugin
     {
         readonly string _config;
@@ -53,7 +53,7 @@ namespace XrmToolsHelloWorld
             using (var scope = CreateScope(serviceProvider))
             {
                 Tracing.Trace("AccountGreetingPlugin: Execute started.");
-                Target.Description = GreetingService.GetGreeting(Target.Name);
+                Target.Description = GreetingService.GetGreeting(Target.Name, (int?)Target.IndustryCode);
             }
         }
     }

@@ -108,7 +108,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AccountGreetingPlugin.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountQueryService.cs" />
     <Compile Include="AccountStatisticsService.cs" />
+    <Compile Include="Entities.cs">
+      <Generator>XrmTools Entity Generator</Generator>
+      <LastGenOutput>Entities.g.cs</LastGenOutput>
+    </Compile>
+    <Compile Include="Entities.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.cs</DependentUpon>
+    </Compile>
     <Compile Include="GreetingService.cs" />
     <Compile Include="OrdinalFormatterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
