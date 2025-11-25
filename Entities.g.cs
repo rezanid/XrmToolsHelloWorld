@@ -13,7 +13,7 @@ namespace XrmToolsHelloWorld
 	/// <summary>
 	/// Display Name: Account
 	/// </summary>
-	[GeneratedCode("TemplatedCodeGenerator", "1.5.0.2")]
+	[GeneratedCode("TemplatedCodeGenerator", "1.5.0.3")]
 	[EntityLogicalName("account")]
 	[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 	public partial class Account : Microsoft.Xrm.Sdk.Entity
@@ -28,20 +28,26 @@ namespace XrmToolsHelloWorld
 
 			public partial class Fields
 			{
+				public const string EMailAddress1 = "emailaddress1";
 				public const string IndustryCode = "industrycode";
 				public const string Name = "name";
+				public const string Revenue = "revenue";
+				public const string Telephone1 = "telephone1";
 
 				public static bool TryGet(string memberName, out string logicalName)
 				{
 					switch (memberName)
 					{
+						case nameof(EMailAddress1): logicalName = EMailAddress1; return true;
 						case nameof(IndustryCode): logicalName = IndustryCode; return true;
 						case nameof(Name): logicalName = Name; return true;
+						case nameof(Revenue): logicalName = Revenue; return true;
+						case nameof(Telephone1): logicalName = Telephone1; return true;
 						default: logicalName = null; return false;
 					}
 				}
 				public static IEnumerable<string> GetAll() => 
-					new string[] {IndustryCode,Name,};
+					new string[] {EMailAddress1,IndustryCode,Name,Revenue,Telephone1,};
 
 				public static string Get(string memberName)
 					=> TryGet(memberName, out var logicalName)
@@ -95,6 +101,17 @@ namespace XrmToolsHelloWorld
 		}
 
 		/// <summary>
+		/// Max Length: 100<br/>
+		/// Required Level: None<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("emailaddress1")]
+		public string EMailAddress1
+		{
+			get => TryGetAttributeValue("emailaddress1", out string value) ? value : null;
+			set => this["emailaddress1"] = value;
+		}
+		/// <summary>
 		/// Required Level: None<br/>
 		/// Valid for: Create Update Read<br/>
 		/// </summary>
@@ -115,9 +132,135 @@ namespace XrmToolsHelloWorld
 			get => TryGetAttributeValue("name", out string value) ? value : null;
 			set => this["name"] = value;
 		}
+		/// <summary>
+		/// Required Level: None<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("revenue")]
+		public decimal? Revenue
+		{
+			get => TryGetAttributeValue("revenue", out Money money) ? (decimal?)money.Value : null;
+			set => this["revenue"] = value.HasValue ? new Money(value.Value) : null;
+		}
+		/// <summary>
+		/// Max Length: 50<br/>
+		/// Required Level: None<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("telephone1")]
+		public string Telephone1
+		{
+			get => TryGetAttributeValue("telephone1", out string value) ? value : null;
+			set => this["telephone1"] = value;
+		}
 		public Account() : base(Meta.EntityLogicalName) { }
 		public Account(Guid id) : base(Meta.EntityLogicalName, id) { }
 		public Account(string keyName, object keyValue) : base(Meta.EntityLogicalName, keyName, keyValue) { }
 		public Account(KeyAttributeCollection keyAttributes) : base(Meta.EntityLogicalName, keyAttributes) { }
+	}
+	/// <summary>
+	/// Display Name: Contact
+	/// </summary>
+	[GeneratedCode("TemplatedCodeGenerator", "1.5.0.3")]
+	[EntityLogicalName("contact")]
+	[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+	public partial class Contact : Microsoft.Xrm.Sdk.Entity
+	{
+		public partial class Meta 
+		{
+			public const string EntityLogicalName = "contact";
+			public const string EntityLogicalCollectionName = "contacts";
+			public const string EntitySetName = "contacts";
+			public const string PrimaryNameAttribute = "fullname";
+			public const string PrimaryIdAttribute = "contactid";
+
+			public partial class Fields
+			{
+				public const string EMailAddress1 = "emailaddress1";
+				public const string FirstName = "firstname";
+				public const string FullName = "fullname";
+				public const string LastName = "lastname";
+				public const string Telephone1 = "telephone1";
+
+				public static bool TryGet(string memberName, out string logicalName)
+				{
+					switch (memberName)
+					{
+						case nameof(EMailAddress1): logicalName = EMailAddress1; return true;
+						case nameof(FirstName): logicalName = FirstName; return true;
+						case nameof(FullName): logicalName = FullName; return true;
+						case nameof(LastName): logicalName = LastName; return true;
+						case nameof(Telephone1): logicalName = Telephone1; return true;
+						default: logicalName = null; return false;
+					}
+				}
+				public static IEnumerable<string> GetAll() => 
+					new string[] {EMailAddress1,FirstName,FullName,LastName,Telephone1,};
+
+				public static string Get(string memberName)
+					=> TryGet(memberName, out var logicalName)
+						? logicalName
+						: throw new ArgumentException("Invalid attribute logical name.", nameof(memberName));
+			}
+		}
+
+		/// <summary>
+		/// Max Length: 100<br/>
+		/// Required Level: None<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("emailaddress1")]
+		public string EMailAddress1
+		{
+			get => TryGetAttributeValue("emailaddress1", out string value) ? value : null;
+			set => this["emailaddress1"] = value;
+		}
+		/// <summary>
+		/// Max Length: 50<br/>
+		/// Required Level: Recommended<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("firstname")]
+		public string FirstName
+		{
+			get => TryGetAttributeValue("firstname", out string value) ? value : null;
+			set => this["firstname"] = value;
+		}
+		/// <summary>
+		/// Max Length: 160<br/>
+		/// Required Level: None<br/>
+		/// Valid for: Read<br/>
+		/// </summary>
+		[AttributeLogicalName("fullname")]
+		public string FullName
+		{
+			get => TryGetAttributeValue("fullname", out string value) ? value : null;
+		}
+		/// <summary>
+		/// Max Length: 50<br/>
+		/// Required Level: ApplicationRequired<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("lastname")]
+		public string LastName
+		{
+			get => TryGetAttributeValue("lastname", out string value) ? value : null;
+			set => this["lastname"] = value;
+		}
+		/// <summary>
+		/// Max Length: 50<br/>
+		/// Required Level: None<br/>
+		/// Valid for: Create Update Read<br/>
+		/// </summary>
+		[AttributeLogicalName("telephone1")]
+		public string Telephone1
+		{
+			get => TryGetAttributeValue("telephone1", out string value) ? value : null;
+			set => this["telephone1"] = value;
+		}
+		public Contact() : base(Meta.EntityLogicalName) { }
+		public Contact(Guid id) : base(Meta.EntityLogicalName, id) { }
+		public Contact(string keyName, object keyValue) : base(Meta.EntityLogicalName, keyName, keyValue) { }
+		public Contact(KeyAttributeCollection keyAttributes) : base(Meta.EntityLogicalName, keyAttributes) { }
 	}
 }

@@ -29,9 +29,6 @@ namespace XrmToolsHelloWorld
         [Dependency]
         ITracingService Tracing { get => Require<ITracingService>(); }
 
-        [Dependency]
-        IGreetingService GreetingService { get => Require<IGreetingService>(); }
-
         [DependencyProvider]
         IOrganizationService OrganizationService
         {
@@ -47,6 +44,9 @@ namespace XrmToolsHelloWorld
                 ? instance
                 : Set(ServiceFactory.CreateOrganizationService(Context.UserId));
         }
+
+        [Dependency]
+        IGreetingService GreetingService { get => Require<IGreetingService>(); }
 
         public void Execute(IServiceProvider serviceProvider)
         {

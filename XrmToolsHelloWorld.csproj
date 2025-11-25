@@ -119,9 +119,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="FollowUpSuggestionService.cs" />
     <Compile Include="GreetingService.cs" />
     <Compile Include="OrdinalFormatterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuggestNextFollowUpApiPlugin.cs">
+      <Generator>Xrm Tools Plugin Code Generator</Generator>
+      <LastGenOutput>SuggestNextFollowUpApiPlugin.g.cs</LastGenOutput>
+      <IsXrmPlugin>True</IsXrmPlugin>
+    </Compile>
+    <Compile Include="SuggestNextFollowUpApiPlugin.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuggestNextFollowUpApiPlugin.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
