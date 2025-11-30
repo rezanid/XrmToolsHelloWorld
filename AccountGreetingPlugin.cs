@@ -5,7 +5,7 @@ using XrmTools.Meta.Attributes;
 namespace XrmToolsHelloWorld
 {
     [Plugin]
-    [Step("Create", "account", "name, description, industrycode", Stages.PreOperation, ExecutionMode.Synchronous)]
+    [Step("Create", "account", "name,description,industrycode", Stages.PreOperation, ExecutionMode.Synchronous)]
     public partial class AccountGreetingPlugin : IPlugin
     {
         readonly string _config;

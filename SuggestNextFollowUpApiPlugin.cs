@@ -48,22 +48,22 @@
         public class Request
         {
             public EntityReference Target { get; set; }
-            public PreferredChannel? PreferredChannel { get; set; }
-            public DateTime? LastInteractionDate { get; set; }
             public int? UrgencyOverride { get; set; }
+            public DateTime? LastInteractionDate { get; set; }
+            public CommunicationChannel? PreferredChannel { get; set; }
         }
 
         [CustomApiResponse]
         public class Response
         {
-            public DateTime SuggestedFollowUpDate { get; set; }
-            public PreferredChannel SuggestedChannel { get; set; }
+            public CommunicationChannel SuggestedChannel { get; set; }
             public int ImportanceScore { get; set; }
             public string Reason { get; set; }
+            public DateTime SuggestedFollowUpDate { get; set; }
         }
     }
     
-    public enum PreferredChannel
+    public enum CommunicationChannel
     {
         Phone, Email, Teams, InPerson
     }

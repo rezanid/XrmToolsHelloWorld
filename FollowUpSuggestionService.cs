@@ -108,8 +108,8 @@
             return today.AddDays(7);
         }
 
-        private PreferredChannel ResolvePreferredChannel(
-            PreferredChannel? requestedChannel,
+        private CommunicationChannel ResolvePreferredChannel(
+            CommunicationChannel? requestedChannel,
             Entity target)
         {
             if (requestedChannel.HasValue)
@@ -122,15 +122,15 @@
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                return PreferredChannel.Email;
+                return CommunicationChannel.Email;
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                return PreferredChannel.Phone;
+                return CommunicationChannel.Phone;
             }
 
-            return PreferredChannel.Teams;
+            return CommunicationChannel.Teams;
         }
 
         private int CalculateImportanceScore(
@@ -179,7 +179,7 @@
             Entity target,
             DateTime lastInteraction,
             DateTime suggestedFollowUpDate,
-            PreferredChannel channel,
+            CommunicationChannel channel,
             int importanceScore,
             double daysSinceLastInteraction,
             int? urgencyOverride)

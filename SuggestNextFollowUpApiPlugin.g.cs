@@ -59,18 +59,18 @@ namespace XrmToolsHelloWorld
         {
             var request = new SuggestNextFollowUpApiPlugin.Request();
             request.Target = context.InputParameters.TryGetValue("Target", out Microsoft.Xrm.Sdk.EntityReference target) ? target : default;
-            request.PreferredChannel = context.InputParameters.TryGetValue("PreferredChannel", out OptionSetValue preferredchannel) ? (XrmToolsHelloWorld.PreferredChannel?)preferredchannel.Value : default;
-            request.LastInteractionDate = context.InputParameters.TryGetValue("LastInteractionDate", out System.DateTime? lastinteractiondate) ? lastinteractiondate : default;
             request.UrgencyOverride = context.InputParameters.TryGetValue("UrgencyOverride", out int? urgencyoverride) ? urgencyoverride : default;
+            request.LastInteractionDate = context.InputParameters.TryGetValue("LastInteractionDate", out System.DateTime? lastinteractiondate) ? lastinteractiondate : default;
+            request.PreferredChannel = context.InputParameters.TryGetValue("PreferredChannel", out OptionSetValue preferredchannel) ? (XrmToolsHelloWorld.CommunicationChannel?)preferredchannel.Value : default;
             return request;
         }
 
         private static void SetResponse(IExecutionContext context, SuggestNextFollowUpApiPlugin.Response response)
         {
-            if (response.SuggestedFollowUpDate is DateTime suggestedfollowupdateValue) context.OutputParameters["SuggestedFollowUpDate"] = suggestedfollowupdateValue;
-            if (response.SuggestedChannel is XrmToolsHelloWorld.PreferredChannel suggestedchannelValue) context.OutputParameters["SuggestedChannel"] = new OptionSetValue((int)suggestedchannelValue);
+            if (response.SuggestedChannel is XrmToolsHelloWorld.CommunicationChannel suggestedchannelValue) context.OutputParameters["SuggestedChannel"] = new OptionSetValue((int)suggestedchannelValue);
             if (response.ImportanceScore is int importancescoreValue) context.OutputParameters["ImportanceScore"] = importancescoreValue;
             if (response.Reason is string reasonValue) context.OutputParameters["Reason"] = reasonValue;
+            if (response.SuggestedFollowUpDate is DateTime suggestedfollowupdateValue) context.OutputParameters["SuggestedFollowUpDate"] = suggestedfollowupdateValue;
         }
     }
 }
