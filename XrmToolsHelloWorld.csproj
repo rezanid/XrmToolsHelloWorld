@@ -124,9 +124,9 @@
     <Compile Include="OrdinalFormatterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuggestNextFollowUpApiPlugin.cs">
+      <IsXrmPlugin>True</IsXrmPlugin>
       <Generator>Xrm Tools Plugin Code Generator</Generator>
       <LastGenOutput>SuggestNextFollowUpApiPlugin.g.cs</LastGenOutput>
-      <IsXrmPlugin>True</IsXrmPlugin>
     </Compile>
     <Compile Include="SuggestNextFollowUpApiPlugin.g.cs">
       <AutoGen>True</AutoGen>
