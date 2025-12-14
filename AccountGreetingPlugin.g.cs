@@ -48,6 +48,7 @@ namespace XrmToolsHelloWorld
 	    			public const string Description = "description";
 	    			public const string IndustryCode = "industrycode";
 	    			public const string Name = "name";
+	    			public const string SuggestedFollowup = "rn_suggestedfollowup";
 	    		
 	    			public static bool TryGet(string logicalName, out string attribute)
 	    			{
@@ -56,6 +57,7 @@ namespace XrmToolsHelloWorld
 	    					case nameof(Description): attribute = Description; return true;
 	    					case nameof(IndustryCode): attribute = IndustryCode; return true;
 	    					case nameof(Name): attribute = Name; return true;
+	    					case nameof(SuggestedFollowup): attribute = SuggestedFollowup; return true;
 	    					default: attribute = null; return false;
 	    				}
 	    			}
@@ -177,6 +179,16 @@ namespace XrmToolsHelloWorld
 	    	{
 	    		get => TryGetAttributeValue("name", out string value) ? value : null;
 	    		set => this["name"] = value;
+	    	}
+	    	/// <summary>
+	    	/// Required Level: None</br>
+	    	/// Valid for: Create Update Read</br>
+	    	/// </summary>
+	    	[AttributeLogicalName("rn_suggestedfollowup")]
+	    	public DateTime? SuggestedFollowup
+	    	{
+	    		get => TryGetAttributeValue("rn_suggestedfollowup", out DateTime? value) ? value : null;
+	    		set => this["rn_suggestedfollowup"] = value;
 	    	}
 	    }
 	    

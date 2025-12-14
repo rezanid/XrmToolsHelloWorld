@@ -1,11 +1,12 @@
-﻿using Microsoft.Xrm.Sdk;
-using System;
-using XrmTools.Meta.Attributes;
-
-namespace XrmToolsHelloWorld
+﻿namespace XrmToolsHelloWorld
 {
+    using Microsoft.Xrm.Sdk;
+    using System;
+    using XrmTools.Meta.Attributes;
+    using XrmToolsHelloWorld.Messages;
+
     [Plugin]
-    [Step("Create", "account", "name,description,industrycode", Stages.PreOperation, ExecutionMode.Synchronous)]
+    [Step("Create", "account", "name,description,industrycode,rn_suggestedfollowup", Stages.PreOperation, ExecutionMode.Synchronous)]
     public partial class AccountGreetingPlugin : IPlugin
     {
         readonly string _config;
@@ -54,6 +55,13 @@ namespace XrmToolsHelloWorld
             {
                 Tracing.Trace("AccountGreetingPlugin: Execute started.");
                 Target.Description = GreetingService.GetGreeting(Target.Name, (int?)Target.IndustryCode);
+
+                var suggestFollowup = new SuggestFollowupRequest
+                {
+                    Target = Target.ToEntityReference()
+                };
+                var suggestion = (SuggestFollowupResponse) OrganizationService.Execute(suggestFollowup);
+                Target.SuggestedFollowup = suggestion.SuggestedFollowUpDate;
             }
         }
     }
