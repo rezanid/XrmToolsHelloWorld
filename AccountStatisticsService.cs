@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Security;
     using XrmTools.Meta.Attributes;
+    using XrmToolsHelloWorld.Queries;
 
     public interface IAccountStatisticsService
     {
@@ -38,16 +39,7 @@
 
             var filterXml = BuildFilterXml(conditions);
 
-            // Aggregate FetchXML to count accounts
-            var fetchXml = $@"
-            <fetch distinct='false' aggregate='true'>
-              <entity name='account'>
-                <attribute name='accountid' aggregate='count' alias='account_count' />
-                {filterXml}
-              </entity>
-            </fetch>";
-
-            var result = _service.RetrieveMultiple(new FetchExpression(fetchXml));
+            var result = _service.QueryAccountStatistics(filterXml);
 
             if (result.Entities.Count == 0)
                 return 0;

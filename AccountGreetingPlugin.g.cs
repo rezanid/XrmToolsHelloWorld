@@ -13,7 +13,7 @@ using XrmTools;
 
 namespace XrmToolsHelloWorld
 {
-    [GeneratedCode("TemplatedCodeGenerator", "1.5.0.3")]
+    [GeneratedCode("TemplatedCodeGenerator", "1.5.4.0")]
     public partial class AccountGreetingPlugin
     {
         /// <summary>
