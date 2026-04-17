@@ -1,4 +1,7 @@
+#nullable enable
 using Microsoft.Xrm.Sdk;
+using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Extensions;
 using Microsoft.Xrm.Sdk.PluginTelemetry;
@@ -13,7 +16,7 @@ using XrmTools;
 
 namespace XrmToolsHelloWorld
 {
-    [GeneratedCode("TemplatedCodeGenerator", "1.5.4.0")]
+    [GeneratedCode("TemplatedCodeGenerator", "1.5.9.0")]
     public partial class AccountGreetingPlugin
     {
         /// <summary>
@@ -32,182 +35,188 @@ namespace XrmToolsHelloWorld
             scope.Set<XrmToolsHelloWorld.IGreetingService>(scope.Set(new XrmToolsHelloWorld.GreetingService((ITracingService)serviceProvider.GetService(typeof(ITracingService)), scope.Set(new XrmToolsHelloWorld.OrdinalFormatterService()), scope.Set(new XrmToolsHelloWorld.AccountStatisticsService(this.Config, this.SecureConfig, this.OrganizationService)), scope.Set(new XrmToolsHelloWorld.AccountQueryService(this.OrganizationService)))));
             return scope;
         }
-	    [EntityLogicalName("account")]
-	    public class TargetAccount : Entity
-	    {
-	    	public static class Meta
-	    	{
-	    		public const string EntityLogicalName = "account";
-	    		public const string EntityLogicalCollectionName = "accounts";
-	    		public const string EntitySetName = "accounts";
-	    		public const string PrimaryNameAttribute = "";
-	    		public const string PrimaryIdAttribute = "accountid";
-	    
-	    		public partial class Fields
-	    		{
-	    			public const string Description = "description";
-	    			public const string IndustryCode = "industrycode";
-	    			public const string Name = "name";
-	    			public const string SuggestedFollowup = "rn_suggestedfollowup";
-	    		
-	    			public static bool TryGet(string logicalName, out string attribute)
-	    			{
-	    				switch (logicalName)
-	    				{
-	    					case nameof(Description): attribute = Description; return true;
-	    					case nameof(IndustryCode): attribute = IndustryCode; return true;
-	    					case nameof(Name): attribute = Name; return true;
-	    					case nameof(SuggestedFollowup): attribute = SuggestedFollowup; return true;
-	    					default: attribute = null; return false;
-	    				}
-	    			}
-	    
-	    			public string this[string logicalName]
-	    			{
-	    				get => TryGet(logicalName, out var value)
-	    					? value
-	    					: throw new ArgumentException("Invalid attribute logical name.", nameof(logicalName));
-	    			}
-	    		}
-	    
-	    		public partial class OptionSets
-	    		{
-	    			/// <summary>
-	    			/// Type of industry with which the account is associated.
-	    			/// </summary>
-	    			[DataContract]
-	    			public enum Industry
-	    			{
-	    				[EnumMember]
-	    				Accounting = 1,
-	    				[EnumMember]
-	    				AgricultureAndNonPetrolNaturalResourceExtraction = 2,
-	    				[EnumMember]
-	    				BroadcastingPrintingAndPublishing = 3,
-	    				[EnumMember]
-	    				Brokers = 4,
-	    				[EnumMember]
-	    				BuildingSupplyRetail = 5,
-	    				[EnumMember]
-	    				BusinessServices = 6,
-	    				[EnumMember]
-	    				Consulting = 7,
-	    				[EnumMember]
-	    				ConsumerServices = 8,
-	    				[EnumMember]
-	    				DesignDirectionAndCreativeManagement = 9,
-	    				[EnumMember]
-	    				DistributorsDispatchersAndProcessors = 10,
-	    				[EnumMember]
-	    				DoctorSOfficesAndClinics = 11,
-	    				[EnumMember]
-	    				DurableManufacturing = 12,
-	    				[EnumMember]
-	    				EatingAndDrinkingPlaces = 13,
-	    				[EnumMember]
-	    				EntertainmentRetail = 14,
-	    				[EnumMember]
-	    				EquipmentRentalAndLeasing = 15,
-	    				[EnumMember]
-	    				Financial = 16,
-	    				[EnumMember]
-	    				FoodAndTobaccoProcessing = 17,
-	    				[EnumMember]
-	    				InboundCapitalIntensiveProcessing = 18,
-	    				[EnumMember]
-	    				InboundRepairAndServices = 19,
-	    				[EnumMember]
-	    				Insurance = 20,
-	    				[EnumMember]
-	    				LegalServices = 21,
-	    				[EnumMember]
-	    				NonDurableMerchandiseRetail = 22,
-	    				[EnumMember]
-	    				OutboundConsumerService = 23,
-	    				[EnumMember]
-	    				PetrochemicalExtractionAndDistribution = 24,
-	    				[EnumMember]
-	    				ServiceRetail = 25,
-	    				[EnumMember]
-	    				SigAffiliations = 26,
-	    				[EnumMember]
-	    				SocialServices = 27,
-	    				[EnumMember]
-	    				SpecialOutboundTradeContractors = 28,
-	    				[EnumMember]
-	    				SpecialtyRealty = 29,
-	    				[EnumMember]
-	    				Transportation = 30,
-	    				[EnumMember]
-	    				UtilityCreationAndDistribution = 31,
-	    				[EnumMember]
-	    				VehicleRetail = 32,
-	    				[EnumMember]
-	    				Wholesale = 33,
-	    			}
-	    		}
-	    	}
-	    
-	    	/// <summary>
-	    	/// Max Length: 2000</br>
-	    	/// Required Level: None</br>
-	    	/// Valid for: Create Update Read</br>
-	    	/// </summary>
-	    	[AttributeLogicalName("description")]
-	    	public string Description
-	    	{
-	    		get => TryGetAttributeValue("description", out string value) ? value : null;
-	    		set => this["description"] = value;
-	    	}
-	    	/// <summary>
-	    	/// Required Level: None</br>
-	    	/// Valid for: Create Update Read</br>
-	    	/// </summary>
-	    	[AttributeLogicalName("industrycode")]
-	    	public TargetAccount.Meta.OptionSets.Industry? IndustryCode
-	    	{
-	    		get => TryGetAttributeValue("industrycode", out OptionSetValue opt) && opt != null ? (TargetAccount.Meta.OptionSets.Industry?)opt.Value : null;
-	    		set => this["industrycode"] = value == null ? null : new OptionSetValue((int)value);
-	    	}
-	    	/// <summary>
-	    	/// Max Length: 160</br>
-	    	/// Required Level: ApplicationRequired</br>
-	    	/// Valid for: Create Update Read</br>
-	    	/// </summary>
-	    	[AttributeLogicalName("name")]
-	    	public string Name
-	    	{
-	    		get => TryGetAttributeValue("name", out string value) ? value : null;
-	    		set => this["name"] = value;
-	    	}
-	    	/// <summary>
-	    	/// Required Level: None</br>
-	    	/// Valid for: Create Update Read</br>
-	    	/// </summary>
-	    	[AttributeLogicalName("rn_suggestedfollowup")]
-	    	public DateTime? SuggestedFollowup
-	    	{
-	    		get => TryGetAttributeValue("rn_suggestedfollowup", out DateTime? value) ? value : null;
-	    		set => this["rn_suggestedfollowup"] = value;
-	    	}
-	    }
-	    
-	    public TargetAccount Target
+    
+        public static CreateAccountEntity Target
         {
-            get => EntityOrDefault<TargetAccount>(DependencyScope<AccountGreetingPlugin>.Current.Require<IPluginExecutionContext>().InputParameters, "Target");
+            get => EntityOrDefault<CreateAccountEntity>(Require<IPluginExecutionContext>().InputParameters, "Target")!;
+        }
+            
+        [EntityLogicalName("account")]
+        public class CreateAccountEntity : Entity
+        {
+        	public static class Meta
+        	{
+        		public const string EntityLogicalName = "account";
+        		public const string EntityLogicalCollectionName = "accounts";
+        		public const string EntitySetName = "accounts";
+        		public const string PrimaryNameAttribute = "";
+        		public const string PrimaryIdAttribute = "accountid";
+        
+        		public partial class Fields
+        		{
+        			public const string Description = "description";
+        			public const string IndustryCode = "industrycode";
+        			public const string Name = "name";
+        			public const string SuggestedFollowup = "rn_suggestedfollowup";
+        		
+        			public static bool TryGet(string logicalName, out string attribute)
+        			{
+        				switch (logicalName)
+        				{
+        					case nameof(Description): attribute = Description; return true;
+        					case nameof(IndustryCode): attribute = IndustryCode; return true;
+        					case nameof(Name): attribute = Name; return true;
+        					case nameof(SuggestedFollowup): attribute = SuggestedFollowup; return true;
+        					default: attribute = null; return false;
+        				}
+        			}
+        
+        			public string this[string logicalName]
+        			{
+        				get => TryGet(logicalName, out var value)
+        					? value
+        					: throw new ArgumentException("Invalid attribute logical name.", nameof(logicalName));
+        			}
+        		}
+        
+        		public partial class OptionSets
+        		{
+        			/// <summary>
+        			/// Type of industry with which the account is associated.
+        			/// </summary>
+        			[DataContract]
+        			public enum Industry
+        			{
+        				[EnumMember]
+        				Accounting = 1,
+        				[EnumMember]
+        				AgricultureAndNonPetrolNaturalResourceExtraction = 2,
+        				[EnumMember]
+        				BroadcastingPrintingAndPublishing = 3,
+        				[EnumMember]
+        				Brokers = 4,
+        				[EnumMember]
+        				BuildingSupplyRetail = 5,
+        				[EnumMember]
+        				BusinessServices = 6,
+        				[EnumMember]
+        				Consulting = 7,
+        				[EnumMember]
+        				ConsumerServices = 8,
+        				[EnumMember]
+        				DesignDirectionAndCreativeManagement = 9,
+        				[EnumMember]
+        				DistributorsDispatchersAndProcessors = 10,
+        				[EnumMember]
+        				DoctorSOfficesAndClinics = 11,
+        				[EnumMember]
+        				DurableManufacturing = 12,
+        				[EnumMember]
+        				EatingAndDrinkingPlaces = 13,
+        				[EnumMember]
+        				EntertainmentRetail = 14,
+        				[EnumMember]
+        				EquipmentRentalAndLeasing = 15,
+        				[EnumMember]
+        				Financial = 16,
+        				[EnumMember]
+        				FoodAndTobaccoProcessing = 17,
+        				[EnumMember]
+        				InboundCapitalIntensiveProcessing = 18,
+        				[EnumMember]
+        				InboundRepairAndServices = 19,
+        				[EnumMember]
+        				Insurance = 20,
+        				[EnumMember]
+        				LegalServices = 21,
+        				[EnumMember]
+        				NonDurableMerchandiseRetail = 22,
+        				[EnumMember]
+        				OutboundConsumerService = 23,
+        				[EnumMember]
+        				PetrochemicalExtractionAndDistribution = 24,
+        				[EnumMember]
+        				ServiceRetail = 25,
+        				[EnumMember]
+        				SigAffiliations = 26,
+        				[EnumMember]
+        				SocialServices = 27,
+        				[EnumMember]
+        				SpecialOutboundTradeContractors = 28,
+        				[EnumMember]
+        				SpecialtyRealty = 29,
+        				[EnumMember]
+        				Transportation = 30,
+        				[EnumMember]
+        				UtilityCreationAndDistribution = 31,
+        				[EnumMember]
+        				VehicleRetail = 32,
+        				[EnumMember]
+        				Wholesale = 33,
+        			}
+        		}
+        	}
+        
+        	/// <summary>
+        	/// Max Length: 2000</br>
+        	/// Required Level: None</br>
+        	/// Valid for: Create Update Read</br>
+        	/// </summary>
+        	[AttributeLogicalName("description")]
+        	public string Description
+        	{
+        		get => TryGetAttributeValue("description", out string value) ? value : null;
+        		set => this["description"] = value;
+        	}
+        	/// <summary>
+        	/// Required Level: None</br>
+        	/// Valid for: Create Update Read</br>
+        	/// </summary>
+        	[AttributeLogicalName("industrycode")]
+        	public CreateAccountEntity.Meta.OptionSets.Industry? IndustryCode
+        	{
+        		get => TryGetAttributeValue("industrycode", out OptionSetValue opt) && opt != null ? (CreateAccountEntity.Meta.OptionSets.Industry?)opt.Value : null;
+        		set => this["industrycode"] = value == null ? null : new OptionSetValue((int)value);
+        	}
+        	/// <summary>
+        	/// Max Length: 160</br>
+        	/// Required Level: ApplicationRequired</br>
+        	/// Valid for: Create Update Read</br>
+        	/// </summary>
+        	[AttributeLogicalName("name")]
+        	public string Name
+        	{
+        		get => TryGetAttributeValue("name", out string value) ? value : null;
+        		set => this["name"] = value;
+        	}
+        	/// <summary>
+        	/// Required Level: None</br>
+        	/// Valid for: Create Update Read</br>
+        	/// </summary>
+        	[AttributeLogicalName("rn_suggestedfollowup")]
+        	public DateTime? SuggestedFollowup
+        	{
+        		get => TryGetAttributeValue("rn_suggestedfollowup", out DateTime? value) ? value : null;
+        		set => this["rn_suggestedfollowup"] = value;
+        	}
         }
 
-
-	    private static T EntityOrDefault<T>(DataCollection<string, object> keyValues, string key) where T : Entity
+	    private static T? EntityOrDefault<T>(DataCollection<string, object> keyValues, string key) where T : Entity
         {
             if (keyValues is null) return default;
             return keyValues.TryGetValue(key, out var obj) ? obj is Entity entity ? entity.ToEntity<T>() : default : default;
         }
-
-        private static T EntityOrDefault<T>(DataCollection<string, Entity> keyValues, string key) where T : Entity
+        private static T? EntityOrDefault<T>(DataCollection<string, Entity> keyValues, string key) where T : Entity
         {
             if (keyValues is null) return default;
             return keyValues.TryGetValue(key, out var entity) ? entity?.ToEntity<T>() : default;
+        }
+
+        private static T[] EntityCollectionOrDefault<T>(DataCollection<string, object> keyValues, string key) where T : Entity
+        {
+            if (keyValues is null) return Array.Empty<T>();
+            return keyValues.TryGetValue(key, out var obj) ? obj is EntityCollection entityCollection
+                ? entityCollection.Entities.Select(e => e.ToEntity<T>()).ToArray() : Array.Empty<T>() : Array.Empty<T>();
         }
 
         private static T Require<T>() => DependencyScope<AccountGreetingPlugin>.Current.Require<T>();
@@ -222,3 +231,4 @@ namespace XrmToolsHelloWorld
         private static T SetAndTrack<T>(string name, T instance) where T : IDisposable => DependencyScope<AccountGreetingPlugin>.Current.SetAndTrack(name, instance);
     }
 }
+#nullable restore

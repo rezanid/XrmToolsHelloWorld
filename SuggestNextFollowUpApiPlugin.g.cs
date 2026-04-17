@@ -1,4 +1,6 @@
 using Microsoft.Xrm.Sdk;
+using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Extensions;
 using Microsoft.Xrm.Sdk.PluginTelemetry;
@@ -13,7 +15,7 @@ using XrmTools;
 
 namespace XrmToolsHelloWorld
 {
-    [GeneratedCode("TemplatedCodeGenerator", "1.5.0.3")]
+    [GeneratedCode("TemplatedCodeGenerator", "1.5.9.0")]
     public partial class SuggestNextFollowUpApiPlugin
     {
         /// <summary>
@@ -32,28 +34,6 @@ namespace XrmToolsHelloWorld
             scope.Set<XrmToolsHelloWorld.IFollowUpSuggestionService>(scope.Set(new XrmToolsHelloWorld.FollowUpSuggestionService(this.OrganizationService, (ITracingService)serviceProvider.GetService(typeof(ITracingService)))));
             return scope;
         }
-	    private static T EntityOrDefault<T>(DataCollection<string, object> keyValues, string key) where T : Entity
-        {
-            if (keyValues is null) return default;
-            return keyValues.TryGetValue(key, out var obj) ? obj is Entity entity ? entity.ToEntity<T>() : default : default;
-        }
-
-        private static T EntityOrDefault<T>(DataCollection<string, Entity> keyValues, string key) where T : Entity
-        {
-            if (keyValues is null) return default;
-            return keyValues.TryGetValue(key, out var entity) ? entity?.ToEntity<T>() : default;
-        }
-
-        private static T Require<T>() => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Require<T>();
-        private static T Require<T>(string name) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Require<T>(name);
-
-        private static bool TryGet<T>(out T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.TryGet(out instance);
-        private static bool TryGet<T>(string name, out T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.TryGet(name, out instance);
-
-        private static T Set<T>(T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Set(instance);
-        private static T Set<T>(string name, T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Set(name, instance);
-        private static T SetAndTrack<T>(T instance) where T : IDisposable => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.SetAndTrack(instance);
-        private static T SetAndTrack<T>(string name, T instance) where T : IDisposable => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.SetAndTrack(name, instance);
 
         private static SuggestNextFollowUpApiPlugin.Request GetRequest(IExecutionContext context)
         {
@@ -72,5 +52,34 @@ namespace XrmToolsHelloWorld
             if (response.Reason is string reasonValue) context.OutputParameters["Reason"] = reasonValue;
             if (response.SuggestedFollowUpDate is DateTime suggestedfollowupdateValue) context.OutputParameters["SuggestedFollowUpDate"] = suggestedfollowupdateValue;
         }
+
+	    private static T EntityOrDefault<T>(DataCollection<string, object> keyValues, string key) where T : Entity
+        {
+            if (keyValues is null) return default;
+            return keyValues.TryGetValue(key, out var obj) ? obj is Entity entity ? entity.ToEntity<T>() : default : default;
+        }
+        private static T EntityOrDefault<T>(DataCollection<string, Entity> keyValues, string key) where T : Entity
+        {
+            if (keyValues is null) return default;
+            return keyValues.TryGetValue(key, out var entity) ? entity?.ToEntity<T>() : default;
+        }
+
+        private static T[] EntityCollectionOrDefault<T>(DataCollection<string, object> keyValues, string key) where T : Entity
+        {
+            if (keyValues is null) return Array.Empty<T>();
+            return keyValues.TryGetValue(key, out var obj) ? obj is EntityCollection entityCollection
+                ? entityCollection.Entities.Select(e => e.ToEntity<T>()).ToArray() : Array.Empty<T>() : Array.Empty<T>();
+        }
+
+        private static T Require<T>() => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Require<T>();
+        private static T Require<T>(string name) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Require<T>(name);
+
+        private static bool TryGet<T>(out T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.TryGet(out instance);
+        private static bool TryGet<T>(string name, out T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.TryGet(name, out instance);
+
+        private static T Set<T>(T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Set(instance);
+        private static T Set<T>(string name, T instance) => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.Set(name, instance);
+        private static T SetAndTrack<T>(T instance) where T : IDisposable => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.SetAndTrack(instance);
+        private static T SetAndTrack<T>(string name, T instance) where T : IDisposable => DependencyScope<SuggestNextFollowUpApiPlugin>.Current.SetAndTrack(name, instance);
     }
 }

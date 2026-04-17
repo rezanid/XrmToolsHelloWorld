@@ -13,7 +13,7 @@ namespace XrmToolsHelloWorld
 	/// <summary>
 	/// Display Name: Account
 	/// </summary>
-	[GeneratedCode("TemplatedCodeGenerator", "1.5.0.3")]
+	[GeneratedCode("TemplatedCodeGenerator", "1.6.0.0")]
 	[EntityLogicalName("account")]
 	[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 	public partial class Account : Microsoft.Xrm.Sdk.Entity
@@ -161,7 +161,7 @@ namespace XrmToolsHelloWorld
 	/// <summary>
 	/// Display Name: Contact
 	/// </summary>
-	[GeneratedCode("TemplatedCodeGenerator", "1.5.0.3")]
+	[GeneratedCode("TemplatedCodeGenerator", "1.6.0.0")]
 	[EntityLogicalName("contact")]
 	[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 	public partial class Contact : Microsoft.Xrm.Sdk.Entity

@@ -15,6 +15,7 @@
     <EnvironmentUrl />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,8 +43,8 @@
   <ItemGroup>
     <Compile Include="AccountGreetingPlugin.cs">
       <Generator>XrmTools Plugin Code Generator</Generator>
-      <LastGenOutput>AccountGreetingPlugin.g.cs</LastGenOutput>
       <IsXrmPlugin>True</IsXrmPlugin>
+      <LastGenOutput>AccountGreetingPlugin.g.cs</LastGenOutput>
     </Compile>
     <Compile Include="AccountGreetingPlugin.g.cs">
       <AutoGen>True</AutoGen>
@@ -74,7 +75,7 @@
     </Compile>
     <Compile Include="SuggestNextFollowUpApiPlugin.cs">
       <IsXrmPlugin>True</IsXrmPlugin>
-      <Generator>Xrm Tools Plugin Code Generator</Generator>
+      <Generator>XrmTools Plugin Code Generator</Generator>
       <LastGenOutput>SuggestNextFollowUpApiPlugin.g.cs</LastGenOutput>
     </Compile>
     <Compile Include="SuggestNextFollowUpApiPlugin.g.cs">
@@ -149,12 +150,16 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="packages\XrmTools.Meta.Attributes.1.1.2\analyzers\dotnet\cs\XrmTools.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="packages\XrmTools.Meta.Attributes.1.1.2\analyzers\dotnet\cs\XrmTools.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\XrmTools.Meta.Attributes.1.0.59\build\XrmTools.Meta.Attributes.targets" Condition="Exists('packages\XrmTools.Meta.Attributes.1.0.59\build\XrmTools.Meta.Attributes.targets')" />
+  <Import Project="packages\XrmTools.Meta.Attributes.1.1.2\build\XrmTools.Meta.Attributes.targets" Condition="Exists('packages\XrmTools.Meta.Attributes.1.1.2\build\XrmTools.Meta.Attributes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\XrmTools.Meta.Attributes.1.0.59\build\XrmTools.Meta.Attributes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\XrmTools.Meta.Attributes.1.0.59\build\XrmTools.Meta.Attributes.targets'))" />
+    <Error Condition="!Exists('packages\XrmTools.Meta.Attributes.1.1.2\build\XrmTools.Meta.Attributes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\XrmTools.Meta.Attributes.1.1.2\build\XrmTools.Meta.Attributes.targets'))" />
   </Target>
 </Project>

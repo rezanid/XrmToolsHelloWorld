@@ -5,7 +5,7 @@
     using XrmTools.Meta.Attributes;
 
     [Plugin]
-    [CustomApi("rn_SuggestNextFollowUp", Name = "SuggestNextFollowUp", DisplayName = "Suggest Next Follow Up", Description = "Suggests the next follow-up action for a given entity.")]
+    [CustomApi("rn_SuggestNextFollowUp", Name = "SuggestNextFollowUp", DisplayName = "Suggest Next Follow Up", Description = "Suggests the next follow-up action for a given entity.", StepType = ProcessingStepTypes.SyncAndAsync)]
     public partial class SuggestNextFollowUpApiPlugin : IPlugin
     {
         [Dependency]

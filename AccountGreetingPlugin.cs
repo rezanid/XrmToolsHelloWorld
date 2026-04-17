@@ -1,4 +1,5 @@
-﻿namespace XrmToolsHelloWorld
+﻿#nullable enable
+namespace XrmToolsHelloWorld
 {
     using Microsoft.Xrm.Sdk;
     using System;
@@ -23,10 +24,10 @@
 
         [Dependency]
         IPluginExecutionContext Context { get => Require<IPluginExecutionContext>(); }
-        
+
         [Dependency]
         IOrganizationServiceFactory ServiceFactory { get => Require<IOrganizationServiceFactory>(); }
-        
+
         [Dependency]
         ITracingService Tracing { get => Require<ITracingService>(); }
 
@@ -51,16 +52,15 @@
 
         public void Execute(IServiceProvider serviceProvider)
         {
-            using (var scope = CreateScope(serviceProvider))
+            using (CreateScope(serviceProvider))
             {
                 Tracing.Trace("AccountGreetingPlugin: Execute started.");
                 Target.Description = GreetingService.GetGreeting(Target.Name, (int?)Target.IndustryCode);
-
                 var suggestFollowup = new SuggestFollowupRequest
                 {
                     Target = Target.ToEntityReference()
                 };
-                var suggestion = (SuggestFollowupResponse) OrganizationService.Execute(suggestFollowup);
+                var suggestion = (SuggestFollowupResponse)OrganizationService.Execute(suggestFollowup);
                 Target.SuggestedFollowup = suggestion.SuggestedFollowUpDate;
             }
         }
